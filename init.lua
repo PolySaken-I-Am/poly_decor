@@ -441,3 +441,184 @@ minetest.register_node("poly_decor:wierlite", {
 		timer:set(0.1, 0)
 	end
 })
+
+minetest.register_node("poly_decor:stake", {
+	description = "Wooden Stake",
+	tiles = {"poly_fence_wood.png", "poly_oben_wood.png", "poly_stripped_wood_edge.png"},
+	connects_to={"poly_decor:stake", "poly_decor:stake2"},
+	sounds = default.node_sound_wood_defaults(),
+	groups={snappy=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "connected",
+		fixed = {
+			{-0.05, -0.5, -0.05, 0.05, 0.35, 0.05},
+			{-0.03, -0.5, -0.03, 0.03, 0.425, 0.03},
+			{-0.01, -0.5, -0.01, 0.01, 0.5, 0.01},
+		},
+		connect_bottom = {-0.0495, -1, -0.0495, 0.0495, -0.5, 0.0495},
+	},
+	selection_box={
+		type="fixed",
+		fixed={-0.15, -0.5, -0.15, 0.15, 0.5, 0.15}
+	}
+})
+
+minetest.register_craft({
+	output="poly_decor:stake 10",
+	recipe={
+		{"default:stick"},
+		{"group:wood"},
+		{"group:wood"}
+	}
+})
+
+minetest.register_node("poly_decor:rope", {
+	description = "Rope",
+	tiles = {"poly_allfaces_rope.png"},
+	inventory_image="poly_horizontal_rope.png",
+	connects_to={"poly_decor:rope", "poly_decor:stake2"},
+	sounds = default.node_sound_leaves_defaults(),
+	groups={snappy=3},
+	walkable=false,
+	climbable=true,
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "connected",
+		fixed = {
+			{-0.036, -0.036, -0.036, 0.036, 0.036, 0.036}
+		},
+		connect_front = {-0.036, -0.036, -0.5, 0.036, 0.036, 0.036},
+		connect_back =  {-0.036, -0.036, 0.5, 0.036, 0.036, 0.036},
+		connect_left =  {-0.036, -0.036, -0.036, -0.5, 0.036, 0.036},
+		connect_right =  {-0.036, -0.036, -0.036, 0.5, 0.036, 0.036},
+		connect_top =  {-0.036, -0.036, -0.036, 0.036, 0.5, 0.036},
+		connect_bottom =  {-0.036, -0.5, -0.036, 0.036, 0.036, 0.036},
+	}
+})
+
+minetest.register_craft({
+	output="poly_decor:rope 9",
+	recipe={
+		{"default:dry_grass_1", "default:dry_grass_1", "default:dry_grass_1"}
+	}
+})
+
+minetest.register_craft({
+	output="poly_decor:rope 9",
+	recipe={
+		{"default:grass_1", "default:grass_1", "default:grass_1"}
+	}
+})
+
+minetest.register_node("poly_decor:stake2", {
+	description = "Lashed Wooden Stake",
+	tiles = {"poly_fence_wood.png^poly_rope_top.png", "poly_oben_wood.png", "poly_stripped_wood_edge.png^poly_horizontal_rope.png"},
+	connects_to={"poly_decor:stake", "poly_decor:stake2", "poly_decor:rope"},
+	sounds = default.node_sound_wood_defaults(),
+	groups={snappy=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "connected",
+		fixed = {
+			{-0.05, -0.5, -0.05, 0.05, 0.35, 0.05},
+			{-0.03, -0.5, -0.03, 0.03, 0.425, 0.03},
+			{-0.01, -0.5, -0.01, 0.01, 0.5, 0.01},
+			{-0.07, -0.12, -0.07, 0.07, 0.12, 0.07}
+		},
+		connect_bottom = {-0.0495, -1, -0.0495, 0.0495, -0.5, 0.0495},
+		connect_front = {-0.036, -0.036, -0.5, 0.036, 0.036, 0.036},
+		connect_back =  {-0.036, -0.036, 0.5, 0.036, 0.036, 0.036},
+		connect_left =  {-0.036, -0.036, -0.036, -0.5, 0.036, 0.036},
+		connect_right =  {-0.036, -0.036, -0.036, 0.5, 0.036, 0.036},
+	},
+	selection_box={
+		type="fixed",
+		fixed={-0.15, -0.5, -0.15, 0.15, 0.5, 0.15}
+	},
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="poly_decor:stake2",
+	recipe={"poly_decor:stake","poly_decor:rope"},
+})
+
+
+minetest.register_node("poly_decor:board_fence_tall", {
+	description = "Tall Wooden Fence",
+	tiles = {"poly_fence_wood.png","poly_fence_wood.png","poly_fence_wood.png^poly_horizontal_rope.png"},
+	connects_to={"poly_decor:board_fence_tall"},
+	sounds = default.node_sound_wood_defaults(),
+	groups={choppy=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "connected",
+		fixed = {
+			{-0.15, -0.5, -0.15, 0.15, 1.5, 0.15},
+		},
+		connect_front = {-0.036, -0.45, -0.5, 0.036, 1.4, 0.036},
+		connect_back =  {-0.036, -0.45, 0.5, 0.036, 1.4, 0.036},
+		connect_left =  {-0.036, -0.45, -0.036, -0.5, 1.4, 0.036},
+		connect_right =  {-0.036, -0.45, -0.036, 0.5, 1.4, 0.036},
+	},
+})
+
+minetest.register_craft({
+	output="poly_decor:board_fence_tall 6",
+	recipe={
+		{"group:wood", "group:tree", "group:wood"},
+		{"poly_decor:rope", "group:tree", "poly_decor:rope"},
+		{"group:wood", "group:tree", "group:wood"}
+	}
+})
+
+minetest.register_node("poly_decor:driftwood_fence_tall", {
+	description = "Tall Driftwood Fence",
+	tiles = {"poly_fence_driftwood.png","poly_fence_driftwood.png","poly_fence_driftwood.png^poly_log_driftwood.png^poly_horizontal_rope.png"},
+	connects_to={"poly_decor:driftwood_fence_tall"},
+	sounds = default.node_sound_wood_defaults(),
+	groups={choppy=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "connected",
+		fixed = {
+			{-0.125, -0.5, -0.125, 0.125, 1.5, 0.125},
+		},
+		connect_front = {-0.031, -0.45, -0.5, 0.036, 1.3, 0.037},
+		connect_back =  {-0.036, -0.45, 0.5, 0.036, 1.45, 0.036},
+		connect_left =  {-0.036, -0.45, -0.031, -0.5, 1.41, 0.034},
+		connect_right =  {-0.033, -0.45, -0.036, 0.5, 1.32, 0.036},
+	},
+})
+
+minetest.register_craft({
+	output="poly_decor:driftwood_fence_tall 6",
+	recipe={
+		{"default:stick", "group:tree", "default:stick"},
+		{"poly_decor:rope", "group:tree", "poly_decor:rope"},
+		{"default:stick", "group:tree", "default:stick"}
+	}
+})
+
+minetest.register_node("poly_decor:frost_glass",{
+	description="Frosted Glass",
+	tiles={"poly_frost_glass.png","poly_frost_glass_detail.png"},
+	drawtype="glasslike_framed",
+	paramtype="light",
+	sunlight_propagates=true,
+	use_texture_alpha=true,
+	groups={cracky=3},
+	sounds=visionLib.Sound.Glass(),
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="poly_decor:frost_glass",
+	recipe="poly_decor:froststone",
+})
