@@ -340,7 +340,7 @@ minetest.register_craft({
 
 minetest.register_node("poly_decor:wierlight", {
 	description="Wierlight",
-	tiles={"poly_0.png"},
+	tiles={"poly_enamel.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
 	drawtype="nodebox",
@@ -372,7 +372,7 @@ minetest.register_node("poly_decor:wierlight", {
 			size = (math.random()/2),
 			vertical = false,
 			collisiondetection=true,
-			texture = "scpark.png",
+			texture = "poly_light_beam.png",
 			glow=8,
 		})
 		end
@@ -401,7 +401,7 @@ minetest.register_craft({
 
 minetest.register_node("poly_decor:wierlite", {
 	description="Wier-lite",
-	tiles={"poly_0.png"},
+	tiles={"poly_enamel.png"},
 	is_ground_content=false,
 	sunlight_propagates=true,
 	drawtype="nodebox",
@@ -433,7 +433,7 @@ minetest.register_node("poly_decor:wierlite", {
 			size = (math.random()/1.5),
 			vertical = false,
 			collisiondetection=true,
-			texture = "scpark.png",
+			texture = "poly_light_beam.png",
 			glow=8,
 		})
 		end
