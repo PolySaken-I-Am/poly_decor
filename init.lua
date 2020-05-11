@@ -478,7 +478,7 @@ minetest.register_node("poly_decor:rope", {
 	description = "Rope",
 	tiles = {"poly_allfaces_rope.png"},
 	inventory_image="poly_horizontal_rope.png",
-	connects_to={"poly_decor:rope", "poly_decor:stake2"},
+	connects_to={"poly_decor:rope", "poly_decor:stake2", "poly_decor:ropebox"},
 	sounds = default.node_sound_leaves_defaults(),
 	groups={snappy=3},
 	walkable=false,
@@ -621,4 +621,158 @@ minetest.register_craft({
 	type="cooking",
 	output="poly_decor:frost_glass",
 	recipe="poly_decor:froststone",
+})
+
+
+minetest.register_craft({
+	output="poly_decor:frost_glass_pane 16",
+	recipe={
+		{"poly_decor:frost_glass", "poly_decor:frost_glass"}
+	}
+})
+
+minetest.register_node("poly_decor:frost_glass_pane", {
+	description = "Frosted Glass Pane",
+	tiles = {"poly_froststone.png","poly_froststone.png","poly_frost_glass_detail.png^poly_frost_glass2.png"},
+	connects_to={"poly_decor:frost_glass_pane", "poly_decor:frost_glass"},
+	sounds = visionLib.Sound.Glass(),
+	groups={choppy=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	sunlight_propagates=true,
+	use_texture_alpha=true,
+	node_box = {
+		type = "connected",
+		fixed = {
+			{-0.05, -0.5, -0.05, 0.05, 0.5, 0.05},
+		},
+		connect_front = {-0.05, -0.5, -0.5, 0.05, 0.5, 0.05},
+		connect_back =  {-0.05, -0.5, 0.5, 0.05, 0.5, -0.05},
+		connect_left =  {0.05, -0.5, -0.05, -0.5, 0.5, 0.05},
+		connect_right =  {-0.05, -0.5, -0.05, 0.5, 0.5, 0.05},
+	},
+})
+
+minetest.register_node("poly_decor:ropebox", {
+	description = "Rope Tether",
+	tiles = {"poly_rope_coil.png", "poly_rope_coil.png", "poly_oben_wood.png", "poly_oben_wood.png", "poly_rope_coil_b.png", "poly_rope_coil_b.png"},
+	sounds = default.node_sound_wood_defaults(),       	connects_to={"group:cracky", "group:choppy", "poly_decor:rope"},
+	groups={choppy=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "connected",
+		fixed = {
+			{-0.125, -0.5, -0.125, 0.125, -0.25, 0.125},
+			{-0.25, -0.5, -0.1875, -0.125, -0.1875, 0.1875},
+			{0.125, -0.5, -0.1875, 0.25, -0.1875, 0.1875},
+		},
+		connect_front = {-0.036, -0.45, -0.5, 0.036, -0.35, 0.036},
+		connect_back =  {-0.036, -0.45, 0.5, 0.036, -0.35, 0.036},
+		connect_left =  {-0.036, -0.45, -0.036, -0.5, -0.35, 0.036},
+		connect_right =  {-0.036, -0.45, -0.036, 0.5, -0.35, 0.036},
+	},
+})
+
+minetest.register_craft({
+	output="poly_decor:ropebox 4",
+	recipe={
+		{"poly_decor:rope", "group:tree", "poly_decor:rope"},
+	}
+})
+
+minetest.register_node("poly_decor:lantern_a", {
+	description = "Iron Lantern",
+	tiles = {"poly_iron.png", "poly_iron.png", "poly_lantern.png"},
+	sounds = visionLib.Sound.Metal(),       
+	groups={cracky=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	light_source=15,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.25, -0.25, -0.25, 0.25, 0.25, 0.25}, 
+			{-0.3125, 0.25, -0.3125, 0.3125, 0.375, 0.3125}, 
+			{-0.3125, -0.375, -0.3125, 0.3125, -0.25, 0.3125}, 
+			{-0.125, 0.375, -0.125, 0.125, 0.5, 0.125}, 
+			{-0.125, -0.5, -0.125, 0.125, -0.375, 0.125}, 
+		}
+	}
+})
+
+minetest.register_craft({
+	output="poly_decor:lantern_a 2",
+	recipe={
+		{"", "default:steel_ingot", ""},
+		{"", "default:torch", ""},
+		{"", "default:steel_ingot", ""}
+	}
+})
+
+minetest.register_craft({
+	output="poly_decor:lantern_b 2",
+	recipe={
+		{"", "", ""},
+		{"default:steel_ingot", "default:torch", "default:steel_ingot"},
+		{"", "default:steel_ingot", ""}
+	}
+})
+
+minetest.register_node("poly_decor:lantern_b", {
+	description = "Iron Brazier",
+	tiles = {"poly_lantern.png","poly_iron.png","poly_iron.png"},
+	sounds = visionLib.Sound.Metal(),       
+	groups={cracky=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	light_source=15,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, -0.125, 0.125, -0.3125, 0.125},
+			{0.125, -0.4375, -0.125, 0.25, -0.3125, 0.125},
+			{-0.25, -0.4375, -0.125, -0.125, -0.3125, 0.125},
+			{-0.125, -0.4375, -0.25, 0.125, -0.3125, -0.125},
+			{-0.125, -0.4375, 0.125, 0.125, -0.3125, 0.25},
+			{-0.125, -0.375, 0.25, 0.125, 0.125, 0.375},
+			{-0.125, -0.375, -0.375, 0.125, 0.125, -0.25},
+			{-0.375, -0.375, -0.125, -0.25, 0.125, 0.125},
+			{0.25, -0.375, -0.125, 0.375, 0.125, 0.125},
+			{-0.3125, -0.125, -0.3125, -0.25, 0, 0.3125},
+			{0.25, -0.125, -0.3125, 0.3125, 0, 0.3125},
+			{-0.25, -0.125, 0.25, 0.25, 0, 0.3125},
+			{-0.25, -0.125, -0.3125, 0.25, 0, -0.25},
+		}
+	},
+	on_construct = function(pos)
+		local meta=minetest.get_meta(pos)
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.1, 0)
+	end,
+	on_timer = function(pos, elapsed)
+		for i=1,math.random(3,19) do
+		pos2={x=pos.x+math.random()/5-0.1, y=pos.y+0.1, z=pos.z+math.random()/5-0.1}
+		minetest.add_particle({
+			pos = pos2,
+			velocity = {x=(math.random()/10)*math.random(-1,1), y=0.4+(math.random()/10)*math.random(-1,1), z=(math.random()/10)*math.random(-1,1)},
+			acceleration = {x=(math.random()/10)*math.random(-1,1), y=(math.random()/10)*math.random(-1,1), z=(math.random()/10)*math.random(-1,1)},
+			expirationtime = math.random()*0.5,
+			size = math.random()*2,
+			vertical = false,
+			texture = "poly_torch_flame.png",
+			glow=8,
+		})
+		minetest.add_particle({
+			pos = {x=pos2.x, y=pos2.y-0.3, z=pos2.z},
+			expirationtime = math.random(),
+			size = math.random()*5,
+			vertical = false,
+			texture = "poly_brazier_flame.png",
+			glow=8,
+		})
+		end
+		local timer=minetest.get_node_timer(pos)
+		timer:set(0.1, 0)
+	end
 })
