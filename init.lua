@@ -776,3 +776,198 @@ minetest.register_node("poly_decor:lantern_b", {
 		timer:set(0.1, 0)
 	end
 })
+
+minetest.register_node("poly_decor:crate_connected",{
+	description="Floorboards",
+	tiles={"poly_crate_border.png","poly_vertical_planks.png"},
+	drawtype="glasslike_framed",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={choppy=3},
+	sounds=default.node_sound_wood_defaults(),
+})
+
+minetest.register_craft({
+	output="poly_decor:crate_connected 20",
+	recipe={
+		{"default:stick", "group:tree", "default:stick"},
+		{"default:stick", "default:chest", "default:stick"},
+		{"default:stick", "group:tree", "default:stick"}
+	}
+})
+
+minetest.register_node("poly_decor:basic_carpet",{
+	description="Blue Mat",
+	drawtype="nodebox",
+	tiles={"poly_carpet_a.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={-0.5,-0.5,-0.5,0.5,-0.45,0.5},
+	},
+	groups={snappy=3},
+	on_place=place_rotated.slab,
+	sounds=default.node_sound_leaves_defaults(),
+})
+
+minetest.register_craft({
+	output="poly_decor:basic_carpet 15",
+	recipe={
+		{"poly_decor:rope", "poly_decor:rope", "poly_decor:rope"},
+		{"poly_decor:rope", "dye:blue", "poly_decor:rope"},
+		{"poly_decor:rope", "poly_decor:rope", "poly_decor:rope"}
+	}
+})
+
+minetest.register_node("poly_decor:basic_carpet2",{
+	description="Red Mat",
+	drawtype="nodebox",
+	tiles={"poly_carpet_b.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={-0.5,-0.5,-0.5,0.5,-0.45,0.5},
+	},
+	groups={snappy=3},
+	on_place=place_rotated.slab,
+	sounds=default.node_sound_leaves_defaults(),
+})
+
+minetest.register_craft({
+	output="poly_decor:basic_carpet2 15",
+	recipe={
+		{"poly_decor:rope", "poly_decor:rope", "poly_decor:rope"},
+		{"poly_decor:rope", "dye:red", "poly_decor:rope"},
+		{"poly_decor:rope", "poly_decor:rope", "poly_decor:rope"}
+	}
+})
+
+minetest.register_node("poly_decor:basic_carpet3",{
+	description="Black Mat",
+	drawtype="nodebox",
+	tiles={"poly_carpet_c.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={-0.5,-0.5,-0.5,0.5,-0.45,0.5},
+	},
+	groups={snappy=3},
+	on_place=place_rotated.slab,
+	sounds=default.node_sound_leaves_defaults(),
+})
+
+minetest.register_craft({
+	output="poly_decor:basic_carpet3 15",
+	recipe={
+		{"poly_decor:rope", "poly_decor:rope", "poly_decor:rope"},
+		{"poly_decor:rope", "dye:black", "poly_decor:rope"},
+		{"poly_decor:rope", "poly_decor:rope", "poly_decor:rope"}
+	}
+})
+
+minetest.register_node("poly_decor:rod", {
+	description = "Iron Rod",
+	tiles = {"poly_iron.png"},
+	sounds = visionLib.Sound.Metal(),
+	groups={cracky=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.05, -0.5, -0.05, 0.05, 0.5, 0.05},
+		},
+	},
+	selection_box={
+		type="fixed",
+		fixed={-0.15, -0.5, -0.15, 0.15, 0.5, 0.15}
+	}
+})
+
+minetest.register_craft({
+	output="poly_decor:rod 10",
+	recipe={
+		{"default:stick"},
+		{"default:steel_ingot"},
+		{"default:steel_ingot"}
+	}
+})
+
+minetest.register_node("poly_decor:rail", {
+	description = "Iron Railing",
+	tiles = {"poly_iron.png"},
+	sounds = visionLib.Sound.Metal(),
+	connects_to={"group:cracky", "group:choppy"},
+	groups={cracky=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "connected",
+		fixed = {
+			{-0.05, -0.5, -0.05, 0.05, 0.5, 0.05},
+		},
+		connect_front = {{-0.036, -0.45, -0.5, 0.036, -0.35, 0.036},{-0.036, -0.036, -0.5, 0.036, 0.036, 0.036},{-0.036, 0.3, -0.5, 0.036, 0.4, 0.036}},
+		connect_back =  {{-0.036, -0.45, 0.5, 0.036, -0.35, 0.036},{-0.036, -0.036, 0.5, 0.036, 0.036, 0.036},{-0.036, 0.3, 0.5, 0.036, 0.4, 0.036}},
+		connect_left =  {{-0.036, -0.45, -0.036, -0.5, -0.35, 0.036},{-0.036, -0.036, -0.036, -0.5, 0.036, 0.036},{-0.036, 0.3, -0.036, -0.5, 0.4, 0.036}},
+		connect_right =  {{-0.036, -0.45, -0.036, 0.5, -0.35, 0.036},{-0.036, -0.036, -0.036, 0.5, 0.036, 0.036},{-0.036, 0.3, -0.036, 0.5, 0.4, 0.036}},
+	},
+	selection_box={
+		type="fixed",
+		fixed={-0.15, -0.5, -0.15, 0.15, 0.5, 0.15}
+	}
+})
+
+minetest.register_craft({
+	output="poly_decor:rail 7",
+	recipe={
+		{"poly_decor:rod"},
+		{"default:steel_ingot"},
+		{"default:steel_ingot"}
+	}
+})
+
+minetest.register_node("poly_decor:chain", {
+	description = "Iron Chain",
+	tiles = {"poly_iron_chain.png"},
+	sounds = visionLib.Sound.Metal(),
+	groups={snappy=3},
+	drawtype = "plantlike",
+	paramtype = "light",
+	selection_box={
+		type="fixed",
+		fixed={-0.15, -0.5, -0.15, 0.15, 0.5, 0.15}
+	}
+})
+
+minetest.register_craft({
+	output="poly_decor:chain 3",
+	recipe={
+		{"poly_decor:rod"},
+		{"default:steel_ingot"},
+		{"poly_decor:rod"}
+	}
+})
+
+minetest.register_node("poly_decor:chain2", {
+	description = "Iron Chain Tether",
+	tiles = {"poly_iron_chain2.png"},
+	sounds = visionLib.Sound.Metal(),
+	groups={snappy=3},
+	drawtype = "plantlike",
+	paramtype = "light",
+	selection_box={
+		type="fixed",
+		fixed={-0.15, -0.5, -0.15, 0.15, 0.5, 0.15}
+	}
+})
+
+minetest.register_craft({
+	output="poly_decor:chain2",
+	recipe={
+		{"default:steel_ingot"},
+		{"poly_decor:chain"}
+	}
+})
