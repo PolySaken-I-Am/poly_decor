@@ -1,4 +1,4 @@
-
+visionLib.Material.require({"iron"})
 
 local function stoneType(name, name2, groups)
 	minetest.register_node("poly_decor:"..name,{
@@ -633,7 +633,7 @@ minetest.register_craft({
 
 minetest.register_node("poly_decor:frost_glass_pane", {
 	description = "Frosted Glass Pane",
-	tiles = {"poly_froststone.png","poly_froststone.png","poly_frost_glass_detail.png^poly_frost_glass2.png"},
+	tiles = {"poly_froststone.png","poly_froststone.png",{name="poly_frost_glass_detail.png^poly_frost_glass2.png", backface_culling = true}},
 	connects_to={"poly_decor:frost_glass_pane", "poly_decor:frost_glass"},
 	sounds = visionLib.Sound.Glass(),
 	groups={choppy=3},
@@ -778,7 +778,7 @@ minetest.register_node("poly_decor:lantern_b", {
 })
 
 minetest.register_node("poly_decor:crate_connected",{
-	description="Floorboards",
+	description="Wooden Crate",
 	tiles={"poly_crate_border.png","poly_vertical_planks.png"},
 	drawtype="glasslike_framed",
 	paramtype="light",
@@ -970,4 +970,145 @@ minetest.register_craft({
 		{"default:steel_ingot"},
 		{"poly_decor:chain"}
 	}
+})
+
+minetest.register_node("poly_decor:crate_connected2",{
+	description="Red Container",
+	tiles={"poly_container_red_border.png","poly_container_red.png"},
+	drawtype="glasslike_framed",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={cracky=3},
+	sounds=visionLib.Sound.Metal(),
+})
+
+minetest.register_craft({
+	output="poly_decor:crate_connected2 20",
+	recipe={
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
+		{"dye:red", "default:chest", "dye:red"},
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"}
+	}
+})
+
+minetest.register_node("poly_decor:crate_connected3",{
+	description="Blue Container",
+	tiles={"poly_container_blue_border.png","poly_container_blue.png"},
+	drawtype="glasslike_framed",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={cracky=3},
+	sounds=visionLib.Sound.Metal(),
+})
+
+minetest.register_craft({
+	output="poly_decor:crate_connected3 20",
+	recipe={
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"},
+		{"dye:blue", "default:chest", "dye:blue"},
+		{"default:steel_ingot", "default:steel_ingot", "default:steel_ingot"}
+	}
+})
+
+minetest.register_node("poly_decor:floorboards",{
+	description="Floorboards",
+	drawtype="nodebox",
+	tiles={"poly_floorboards.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={-0.5,-0.5,-0.5,0.5,-0.45,0.5},
+	},
+	groups={choppy=3},
+	on_place=place_rotated.slab,
+	sounds=default.node_sound_wood_defaults(),
+})
+
+minetest.register_craft({
+	output="poly_decor:floorboards 15",
+	recipe={
+		{"poly_decor:crate_connected", "default:stick", "poly_decor:crate_connected"},
+		{"default:stick", "", "default:stick"},
+		{"poly_decor:crate_connected", "default:stick", "poly_decor:crate_connected"}
+	}
+})
+
+doors.register("polydecor_door_red_container", {
+	tiles = {{name = "poly_door_container1.png", backface_culling = true}},
+	description = "Red Container Door",
+	inventory_image = "poly_door_item_container1.png",
+	protected = true,
+	groups = {cracky = 1, level = 2},
+	sounds = default.node_sound_metal_defaults(),
+	sound_open = "doors_steel_door_open",
+	sound_close = "doors_steel_door_close",
+	recipe = {
+		{"poly_decor:crate_connected2", "default:steel_ingot"},
+		{"poly_decor:crate_connected2", "default:steel_ingot"},
+		{"poly_decor:crate_connected2", "default:steel_ingot"},
+	}
+})
+
+doors.register("polydecor_door_blue_container", {
+	tiles = {{name = "poly_door_container2.png", backface_culling = true}},
+	description = "Blue Container Door",
+	inventory_image = "poly_door_item_container2.png",
+	protected = true,
+	groups = {cracky = 1, level = 2},
+	sounds = default.node_sound_metal_defaults(),
+	sound_open = "doors_steel_door_open",
+	sound_close = "doors_steel_door_close",
+	recipe = {
+		{"poly_decor:crate_connected3", "default:steel_ingot"},
+		{"poly_decor:crate_connected3", "default:steel_ingot"},
+		{"poly_decor:crate_connected3", "default:steel_ingot"},
+	}
+})
+
+minetest.register_node("poly_decor:blome_glass",{
+	description="Dark Glass",
+	tiles={"poly_dark_glass.png","poly_dark_glass_detail.png"},
+	drawtype="glasslike_framed",
+
+	sunlight_propagates=false,
+	use_texture_alpha=true,
+	groups={cracky=3},
+	sounds=visionLib.Sound.Glass(),
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="poly_decor:blome_glass",
+	recipe="poly_decor:blome",
+})
+
+
+minetest.register_craft({
+	output="poly_decor:blome_glass_pane 16",
+	recipe={
+		{"poly_decor:blome_glass", "poly_decor:blome_glass"}
+	}
+})
+
+minetest.register_node("poly_decor:blome_glass_pane", {
+	description = "Dark Glass Pane",
+	tiles = {"poly_blome.png","poly_blome.png",{name="poly_dark_glass_detail.png^poly_dark_glass2.png", backface_culling = true}},
+	connects_to={"poly_decor:blome_glass_pane", "poly_decor:blome_glass"},
+	sounds = visionLib.Sound.Glass(),
+	groups={choppy=3},
+	drawtype = "nodebox",
+
+	sunlight_propagates=false,
+	use_texture_alpha=true,
+	node_box = {
+		type = "connected",
+		fixed = {
+			{-0.05, -0.5, -0.05, 0.05, 0.5, 0.05},
+		},
+		connect_front = {-0.05, -0.5, -0.5, 0.05, 0.5, 0.05},
+		connect_back =  {-0.05, -0.5, 0.5, 0.05, 0.5, -0.05},
+		connect_left =  {0.05, -0.5, -0.05, -0.5, 0.5, 0.05},
+		connect_right =  {-0.05, -0.5, -0.05, 0.5, 0.5, 0.05},
+	},
 })
