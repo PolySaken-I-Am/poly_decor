@@ -1112,3 +1112,22 @@ minetest.register_node("poly_decor:blome_glass_pane", {
 		connect_right =  {-0.05, -0.5, -0.05, 0.5, 0.5, 0.05},
 	},
 })
+
+minetest.register_node("poly_decor:void_glass",{
+	description="Sky Glass",
+	tiles={"poly_blome.png","poly_dark_glass_detail.png",{name="poly_blome.png", backface_culling = false},{name="poly_blome.png", backface_culling = false},{name="poly_blome.png", backface_culling = false},{name="poly_blome.png", backface_culling = false}},
+	sunlight_propagates=true,
+	paramtype="light",
+	use_texture_alpha=true,
+	groups={cracky=3},
+	sounds=visionLib.Sound.Glass(),
+})
+
+minetest.register_craft({
+	output="poly_decor:void_glass",
+	recipe={
+		{"poly_decor:blome", "poly_decor:blome", "poly_decor:blome"},
+		{"poly_decor:blome", "poly_decor:blome_glass", "poly_decor:blome"},
+		{"default:diamondblock", "default:diamondblock", "default:diamondblock"}
+	}
+})
