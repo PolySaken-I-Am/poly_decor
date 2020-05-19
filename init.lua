@@ -884,7 +884,9 @@ minetest.register_node("poly_decor:rod", {
 	selection_box={
 		type="fixed",
 		fixed={-0.15, -0.5, -0.15, 0.15, 0.5, 0.15}
-	}
+	},
+	paramtype2="facedir",
+	on_place=place_rotated.log,
 })
 
 minetest.register_craft({
@@ -939,7 +941,7 @@ minetest.register_node("poly_decor:chain", {
 	selection_box={
 		type="fixed",
 		fixed={-0.15, -0.5, -0.15, 0.15, 0.5, 0.15}
-	}
+	},
 })
 
 minetest.register_craft({
@@ -961,7 +963,7 @@ minetest.register_node("poly_decor:chain2", {
 	selection_box={
 		type="fixed",
 		fixed={-0.15, -0.5, -0.15, 0.15, 0.5, 0.15}
-	}
+	},
 })
 
 minetest.register_craft({
@@ -1129,5 +1131,98 @@ minetest.register_craft({
 		{"poly_decor:blome", "poly_decor:blome", "poly_decor:blome"},
 		{"poly_decor:blome", "poly_decor:blome_glass", "poly_decor:blome"},
 		{"default:diamondblock", "default:diamondblock", "default:diamondblock"}
+	}
+})
+
+minetest.register_node("poly_decor:spikes", {
+	description = "Iron Spikes",
+	tiles = {"poly_iron.png"},
+	sounds = visionLib.Sound.Metal(),
+	groups={cracky=3, fall_damage_add_percent=150},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.0625, -0.5, -0.0625, 0, 0.1875, 0},
+			{0.1875, -0.5, 0.125, 0.25, 0.125, 0.1875},
+			{0.1875, -0.5, -0.375, 0.25, 0.0625, -0.3125},
+			{-0.375, -0.5, -0.3125, -0.3125, -0.0625, -0.25},
+			{-0.25, -0.5, 0.25, -0.1875, 0.0625, 0.3125},
+			{0.0625, -0.5, 0.3125, 0.125, 0, 0.375},
+			{0.375, -0.5, 0.3125, 0.4375, -0.0625, 0.375},
+			{0.375, -0.5, -0.375, 0.4375, -0.1875, -0.3125},
+			{-0.4375, -0.5, -0.375, -0.375, -0.1875, -0.3125},
+			{-0.4375, -0.5, -0.4375, 0.4375, -0.4375, 0.4375},
+		}
+	},
+	selection_box={
+		type="fixed",
+		fixed={-0.5, -0.5, -0.5, 0.5, 0.0625, 0.5}
+	},
+	paramtype2="facedir",
+	on_place=place_rotated.log,
+})
+
+minetest.register_craft({
+	output="poly_decor:spikes 3",
+	recipe={
+		{"poly_decor:rod","poly_decor:rod","poly_decor:rod"}
+	}
+})
+
+minetest.register_node("poly_decor:trampoline", {
+	description = "Bounce Pad",
+	tiles = {"poly_carpet_c.png","poly_iron.png","poly_iron.png","poly_iron.png","poly_iron.png","poly_iron.png",},
+	sounds = visionLib.Sound.Metal(),
+	groups={cracky=3, fall_damage_add_percent=-100, bouncy=90},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2="facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0.125, -0.5, 0.5, 0.25, 0.5},
+			{-0.4375, -0.5, -0.4375, -0.3125, 0.125, -0.3125},
+			{0.3125, -0.5, -0.4375, 0.4375, 0.125, -0.3125},
+			{0.3125, -0.5, 0.3125, 0.4375, 0.125, 0.4375},
+			{-0.4375, -0.5, 0.3125, -0.3125, 0.125, 0.4375},
+		}
+	},
+	on_place=place_rotated.log,
+})
+
+minetest.register_craft({
+	output="poly_decor:trampoline",
+	recipe={
+		{"poly_decor:rod","poly_decor:basic_carpet3","poly_decor:rod"}
+	}
+})
+
+minetest.register_node("poly_decor:trampoline2", {
+	description = "Launch Pad",
+	tiles = {"poly_carpet_d.png","poly_iron.png","poly_iron.png","poly_iron.png","poly_iron.png","poly_iron.png",},
+	sounds = visionLib.Sound.Metal(),
+	groups={cracky=3, fall_damage_add_percent=-100, bouncy=200},
+	drawtype = "nodebox",
+	paramtype = "light",
+	paramtype2="facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, 0.125, -0.5, 0.5, 0.25, 0.5},
+			{-0.4375, -0.5, -0.4375, -0.3125, 0.125, -0.3125},
+			{0.3125, -0.5, -0.4375, 0.4375, 0.125, -0.3125},
+			{0.3125, -0.5, 0.3125, 0.4375, 0.125, 0.4375},
+			{-0.4375, -0.5, 0.3125, -0.3125, 0.125, 0.4375},
+		}
+	},
+	on_place=place_rotated.log,
+})
+
+minetest.register_craft({
+	output="poly_decor:trampoline2",
+	recipe={
+		{"poly_decor:froststone","poly_decor:trampoline","default:mese"}
 	}
 })
