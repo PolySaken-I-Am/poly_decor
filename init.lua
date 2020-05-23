@@ -1261,6 +1261,7 @@ minetest.register_craft({
 	recipe={
 		{"poly_decor:froststone","poly_decor:trampoline","default:mese"}
 	}
+<<<<<<< HEAD
 })
 
 stoneType("shimmerite", "Gilt Shimmerite", {cracky=3})
@@ -1282,4 +1283,6 @@ minetest.register_craft({
 		{"poly_decor:blome", "default:diamond", "poly_decor:blome"},
 		{"poly_decor:blome", "poly_decor:blome", "poly_decor:blome"}
 	}
+=======
+>>>>>>> 4eeb0fbbbbcd586118ea048167407e9aeb14bfec
 })
