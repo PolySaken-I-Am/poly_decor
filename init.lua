@@ -1,5 +1,23 @@
 visionLib.Material.require({"iron"})
 
+local smallstorageform=""..
+"size[8,7;]"..
+"list[context;main;2.5,0;3,3;]"..
+"list[current_player;main;0,3.2;8,4;]"..
+"listring[]"
+
+local mediumstorageform=""..
+"size[8,7;]"..
+"list[context;main;2,0;4,3;]"..
+"list[current_player;main;0,3.2;8,4;]"..
+"listring[]"
+
+local largestorageform=""..
+"size[8,7;]"..
+"list[context;main;0,0;8,3;]"..
+"list[current_player;main;0,3.2;8,4;]"..
+"listring[]"
+
 local function stoneType(name, name2, groups)
 	minetest.register_node("poly_decor:"..name,{
 		description=name2,
@@ -813,7 +831,7 @@ minetest.register_node("poly_decor:lantern_b", {
 })
 
 minetest.register_node("poly_decor:crate_connected",{
-	description="Wooden Crate",
+	description="Wooden Boxing",
 	tiles={"poly_crate_border.png","poly_vertical_planks.png"},
 	drawtype="glasslike_framed",
 	paramtype="light",
@@ -930,6 +948,28 @@ minetest.register_craft({
 		{"default:stick"},
 		{"default:steel_ingot"},
 		{"default:steel_ingot"}
+	}
+})
+
+minetest.register_node("poly_decor:pole", {
+	description = "Iron Pole",
+	tiles = {"poly_iron.png"},
+	sounds = visionLib.Sound.Metal(),
+	groups={cracky=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	node_box = {
+		type = "fixed",
+		fixed={-0.1, -0.5, -0.1, 0.1, 0.5, 0.1}
+	},
+	paramtype2="facedir",
+	on_place=place_rotated.log,
+})
+
+minetest.register_craft({
+	output="poly_decor:pole",
+	recipe={
+		{"poly_decor:rod", "poly_decor:rod"}
 	}
 })
 
@@ -1243,6 +1283,7 @@ minetest.register_node("poly_decor:trampoline2", {
 	drawtype = "nodebox",
 	paramtype = "light",
 	paramtype2="facedir",
+	on_place=place_rotated.log,
 	node_box = {
 		type = "fixed",
 		fixed = {
@@ -1253,7 +1294,6 @@ minetest.register_node("poly_decor:trampoline2", {
 			{-0.4375, -0.5, 0.3125, -0.3125, 0.125, 0.4375},
 		}
 	},
-	on_place=place_rotated.log,
 })
 
 minetest.register_craft({
@@ -1281,5 +1321,733 @@ minetest.register_craft({
 		{"poly_decor:blome", "poly_decor:blome", "poly_decor:blome"},
 		{"poly_decor:blome", "default:diamond", "poly_decor:blome"},
 		{"poly_decor:blome", "poly_decor:blome", "poly_decor:blome"}
+	}
+})
+
+minetest.register_node("poly_decor:iron_ladder", {
+	description = "Metal Ladder",
+	tiles = {"poly_iron.png"},
+	sounds = visionLib.Sound.Metal(),
+	groups={cracky=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	walkable=false,
+	climbable=true,
+	paramtype2="facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{0.25, -0.5, 0.375, 0.375, 0.5, 0.5},
+			{-0.375, -0.5, 0.375, -0.25, 0.5, 0.5},
+			{-0.375, 0.1875, 0.375, 0.375, 0.3125, 0.5},
+			{-0.375, -0.3125, 0.375, 0.375, -0.1875, 0.5},
+		}
+	},
+})
+
+minetest.register_craft({
+	output="poly_decor:iron_ladder 8",
+	recipe={
+		{"poly_decor:rod","default:steel_ingot","poly_decor:rod"}
+	}
+})
+
+minetest.register_node("poly_decor:iron_ladder2", {
+	description = "Metal Rung Ladder",
+	tiles = {"poly_iron.png"},
+	sounds = visionLib.Sound.Metal(),
+	groups={cracky=3},
+	drawtype = "nodebox",
+	paramtype = "light",
+	walkable=false,
+	climbable=true,
+	paramtype2="facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.3125, 0.3125, 0.3125, -0.1875, 0.4375},
+			{-0.375, -0.3125, 0.375, -0.25, -0.1875, 0.5},
+			{0.25, -0.3125, 0.375, 0.375, -0.1875, 0.5},
+			{-0.3125, 0.1875, 0.3125, 0.3125, 0.3125, 0.4375},
+			{-0.375, 0.1875, 0.375, -0.25, 0.3125, 0.5},
+			{0.25, 0.1875, 0.375, 0.375, 0.3125, 0.5}
+		}
+	},
+})
+
+minetest.register_craft({
+	output="poly_decor:iron_ladder2 8",
+	recipe={
+		{"default:steel_ingot","poly_decor:rod","default:steel_ingot"}
+	}
+})
+
+doors.register("polydecor_door_bach", {
+	tiles = {{name = "poly_door_bach.png", backface_culling = true}},
+	description = "Bach Door",
+	inventory_image = "poly_door_item_bach.png",
+	use_texture_alpha=true,
+	groups = {cracky = 1, level = 2},
+	sounds = default.node_sound_metal_defaults(),
+	sound_open = "doors_glass_door_open",
+	sound_close = "doors_glass_door_close",
+	recipe = {
+		{"poly_decor:frost_glass", "default:frost_glass"},
+		{"poly_decor:enamel", "default:steel_ingot"},
+		{"poly_decor:enamel", "default:enamel"},
+	}
+})
+
+doors.register("polydecor_door_bach2", {
+	tiles = {{name = "poly_door_bach.png", backface_culling = true}},
+	description = "Locked Bach Door",
+	inventory_image = "poly_door_item_bach.png",
+	use_texture_alpha=true,
+	protected = true,
+	groups = {cracky = 1, level = 2},
+	sounds = default.node_sound_metal_defaults(),
+	sound_open = "doors_glass_door_open",
+	sound_close = "doors_glass_door_close",
+	recipe = {
+		{"poly_decor:frost_glass", "default:frost_glass"},
+		{"poly_decor:enamel", "default:steel_ingot"},
+		{"poly_decor:enamel", "default:enamel"},
+	}
+})
+
+minetest.register_node("poly_decor:small_storage",{
+	description="Small Wooden Crate",
+	tiles={"poly_crate_small.png","poly_crate_small.png","poly_crate_small_side.png"},
+	drawtype="nodebox",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={choppy=3},
+	sounds=default.node_sound_wood_defaults(),
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.375, -0.25, 0.1875, 0.375},
+			{0.25, -0.5, -0.375, 0.375, 0.1875, 0.375},
+			{-0.25, -0.5, 0.25, 0.25, 0.1875, 0.375},
+			{-0.25, -0.5, -0.375, 0.25, 0.1875, -0.25},
+			{-0.25, -0.5, -0.25, 0.25, 0.125, 0.25},
+		}
+	},
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		local inv=meta:get_inventory()
+		inv:set_list("main", {""})
+		inv:set_size("main", 9)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", smallstorageform)
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+minetest.register_craft({
+	output="poly_decor:small_storage",
+	recipe={
+		{"default:steel_ingot", "group:wood", ""},
+		{"group:wood", "", "group:wood"},
+		{"", "group:wood", ""}
+	}
+})
+
+minetest.register_node("poly_decor:medium_storage",{
+	description="Medium Wooden Crate",
+	tiles={"poly_crate_medium.png","poly_crate_medium.png","poly_crate_medium_side.png"},
+	drawtype="nodebox",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={choppy=3},
+	sounds=default.node_sound_wood_defaults(),
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, -0.4375, -0.3125, 0.3, 0.4375},
+			{0.3125, -0.5, -0.4375, 0.4375, 0.3, 0.4375},
+			{-0.3125, -0.5, -0.4375, 0.3125, 0.3, -0.3125},
+			{-0.3125, -0.5, 0.3125, 0.3125, 0.3, 0.4375},
+			{-0.3125, -0.5, -0.3125, 0.3125, 0.2375, 0.3125},
+		}
+	},
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		local inv=meta:get_inventory()
+		inv:set_list("main", {""})
+		inv:set_size("main", 12)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", mediumstorageform)
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+minetest.register_craft({
+	output="poly_decor:medium_storage",
+	recipe={
+		{"default:steel_ingot", "group:wood", ""},
+		{"group:wood", "group:tree", "group:wood"},
+		{"", "group:wood", ""}
+	}
+})
+
+minetest.register_node("poly_decor:large_storage",{
+	description="Large Wooden Crate",
+	tiles={"poly_crate_large.png"},
+	drawtype="nodebox",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={choppy=3},
+	sounds=default.node_sound_wood_defaults(),
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, -0.375, 0.5, 0.5},
+			{0.375, -0.5, -0.5, 0.5, 0.5, 0.5}, 
+			{-0.5, -0.5, 0.375, 0.5, 0.5, 0.5}, 
+			{-0.5, -0.5, -0.5, 0.5, 0.5, -0.375},
+			{-0.5, -0.5, -0.5, 0.5, 0.4375, 0.5},
+		}
+	},
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		local inv=meta:get_inventory()
+		inv:set_list("main", {""})
+		inv:set_size("main", 24)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", largestorageform)
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+minetest.register_craft({
+	output="poly_decor:large_storage",
+	recipe={
+		{"default:steel_ingot", "group:wood", "group:wood"},
+		{"group:wood", "group:tree", "group:wood"},
+		{"group:wood", "group:wood", "group:wood"}
+	}
+})
+
+minetest.register_node("poly_decor:deck_iron",{
+	description="Deck Steel",
+	drawtype="nodebox",
+	tiles={"poly_iron3.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={-0.5,-0.5,-0.5,0.5,-0.45,0.5},
+	},
+	groups={cracky=3},
+	on_place=place_rotated.slab,
+	sounds=visionLib.Sound.Metal(),
+})
+
+minetest.register_craft({
+	output="poly_decor:deck_iron 32",
+	recipe={
+		{"default:steel_ingot", "default:steelblock", "default:steel_ingot"},
+	}
+})
+
+minetest.register_node("poly_decor:deck_iron2",{
+	description="Steel Grille",
+	drawtype="nodebox",
+	tiles={{name="poly_iron4.png", backface_culling=true}},
+	paramtype="light",
+	sunlight_propagates=true,
+	node_box={
+		type="fixed",
+		fixed={-0.5,-0.5,-0.5,0.5,-0.45,0.5},
+	},
+	groups={snappy=3},
+	sounds=visionLib.Sound.Metal(),
+})
+
+minetest.register_craft({
+	output="poly_decor:deck_iron2",
+	type="shapeless",
+	recipe={
+		"poly_decor:deck_iron"
+	}
+})
+
+minetest.register_node("poly_decor:barrel1",{
+	description="Metal Drum",
+	tiles={"poly_cmetal_orange.png^poly_barrel_lid.png", "poly_cmetal_orange.png", "poly_cmetal_orange.png"},
+	drawtype="nodebox",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={cracky=3},
+	sounds=visionLib.Sound.Metal(),
+	paramtype2="facedir",
+	on_place=place_rotated.log,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.375, 0.375, 0.5, 0.375}, 
+			{-0.4375, -0.5, -0.25, 0.4375, 0.5, 0.25}, 
+			{-0.25, -0.5, -0.4375, 0.25, 0.5, 0.4375}, 
+			{-0.25, -0.5, -0.5, 0.25, -0.4375, 0.5}, 
+			{-0.5, -0.5, -0.25, 0.5, -0.4375, 0.25},
+			{-0.4375, -0.5, -0.4375, 0.4375, -0.4375, 0.4375},
+			{0.375, 0.5, -0.3125, 0.5, 0.5625, 0.3125}, 
+			{-0.5, 0.5, -0.3125, -0.375, 0.5625, 0.3125}, 
+			{-0.3125, 0.5, 0.375, 0.3125, 0.5625, 0.5}, 
+			{-0.3125, 0.5, -0.5, 0.3125, 0.5625, -0.375}, 
+			{0.0625, -0.5, 0.125, 0.1875, 0.5625, 0.25}, 
+			{0.3125, 0.5, -0.4375, 0.4375, 0.5625, -0.3125}, 
+			{-0.4375, 0.5, -0.4375, -0.3125, 0.5625, -0.3125}, 
+			{-0.4375, 0.5, 0.3125, -0.3125, 0.5625, 0.4375}, 
+			{0.3125, 0.5, 0.3125, 0.4375, 0.5625, 0.4375}, 
+			{0, -0.5, 0.125, 0.25, 0.5625, 0.25}, 
+			{0.0625, -0.5, 0.0625, 0.1875, 0.5625, 0.3125}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.6875, 0.5}, 
+		}
+	},
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		local inv=meta:get_inventory()
+		inv:set_list("main", {""})
+		inv:set_size("main", 24)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", largestorageform)
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+minetest.register_craft({
+	output="poly_decor:barrel1 2",
+	recipe={
+		{"poly_decor:rust", "poly_decor:rust", "poly_decor:rust"},
+		{"poly_decor:rust", "default:steel_ingot", "poly_decor:rust"},
+		{"poly_decor:rust", "poly_decor:rust", "poly_decor:rust"}
+	}
+})
+
+minetest.register_node("poly_decor:barrel2",{
+	description="Metal Drum",
+	tiles={"poly_cmetal_red.png^poly_barrel_lid.png", "poly_cmetal_red.png", "poly_cmetal_red.png"},
+	drawtype="nodebox",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={cracky=3},
+	sounds=visionLib.Sound.Metal(),
+	paramtype2="facedir",
+	on_place=place_rotated.log,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.375, 0.375, 0.5, 0.375}, 
+			{-0.4375, -0.5, -0.25, 0.4375, 0.5, 0.25}, 
+			{-0.25, -0.5, -0.4375, 0.25, 0.5, 0.4375}, 
+			{-0.25, -0.5, -0.5, 0.25, -0.4375, 0.5}, 
+			{-0.5, -0.5, -0.25, 0.5, -0.4375, 0.25},
+			{-0.4375, -0.5, -0.4375, 0.4375, -0.4375, 0.4375},
+			{0.375, 0.5, -0.3125, 0.5, 0.5625, 0.3125}, 
+			{-0.5, 0.5, -0.3125, -0.375, 0.5625, 0.3125}, 
+			{-0.3125, 0.5, 0.375, 0.3125, 0.5625, 0.5}, 
+			{-0.3125, 0.5, -0.5, 0.3125, 0.5625, -0.375}, 
+			{0.0625, -0.5, 0.125, 0.1875, 0.5625, 0.25}, 
+			{0.3125, 0.5, -0.4375, 0.4375, 0.5625, -0.3125}, 
+			{-0.4375, 0.5, -0.4375, -0.3125, 0.5625, -0.3125}, 
+			{-0.4375, 0.5, 0.3125, -0.3125, 0.5625, 0.4375}, 
+			{0.3125, 0.5, 0.3125, 0.4375, 0.5625, 0.4375}, 
+			{0, -0.5, 0.125, 0.25, 0.5625, 0.25}, 
+			{0.0625, -0.5, 0.0625, 0.1875, 0.5625, 0.3125}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.6875, 0.5}, 
+		}
+	},
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		local inv=meta:get_inventory()
+		inv:set_list("main", {""})
+		inv:set_size("main", 24)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", largestorageform)
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+minetest.register_craft({
+	output="poly_decor:barrel2",
+	type="shapeless",
+	recipe={
+		"poly_decor:barrel1", "dye:red"
+	}
+})
+
+minetest.register_node("poly_decor:barrel3",{
+	description="Metal Drum",
+	tiles={"poly_cmetal_blue.png^poly_barrel_lid.png", "poly_cmetal_blue.png", "poly_cmetal_blue.png"},
+	drawtype="nodebox",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={cracky=3},
+	sounds=visionLib.Sound.Metal(),
+	paramtype2="facedir",
+	on_place=place_rotated.log,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.375, 0.375, 0.5, 0.375}, 
+			{-0.4375, -0.5, -0.25, 0.4375, 0.5, 0.25}, 
+			{-0.25, -0.5, -0.4375, 0.25, 0.5, 0.4375}, 
+			{-0.25, -0.5, -0.5, 0.25, -0.4375, 0.5}, 
+			{-0.5, -0.5, -0.25, 0.5, -0.4375, 0.25},
+			{-0.4375, -0.5, -0.4375, 0.4375, -0.4375, 0.4375},
+			{0.375, 0.5, -0.3125, 0.5, 0.5625, 0.3125}, 
+			{-0.5, 0.5, -0.3125, -0.375, 0.5625, 0.3125}, 
+			{-0.3125, 0.5, 0.375, 0.3125, 0.5625, 0.5}, 
+			{-0.3125, 0.5, -0.5, 0.3125, 0.5625, -0.375}, 
+			{0.0625, -0.5, 0.125, 0.1875, 0.5625, 0.25}, 
+			{0.3125, 0.5, -0.4375, 0.4375, 0.5625, -0.3125}, 
+			{-0.4375, 0.5, -0.4375, -0.3125, 0.5625, -0.3125}, 
+			{-0.4375, 0.5, 0.3125, -0.3125, 0.5625, 0.4375}, 
+			{0.3125, 0.5, 0.3125, 0.4375, 0.5625, 0.4375}, 
+			{0, -0.5, 0.125, 0.25, 0.5625, 0.25}, 
+			{0.0625, -0.5, 0.0625, 0.1875, 0.5625, 0.3125}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.6875, 0.5}, 
+		}
+	},
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		local inv=meta:get_inventory()
+		inv:set_list("main", {""})
+		inv:set_size("main", 24)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", largestorageform)
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+minetest.register_craft({
+	output="poly_decor:barrel3",
+	type="shapeless",
+	recipe={
+		"poly_decor:barrel1", "dye:blue"
+	}
+})
+
+minetest.register_node("poly_decor:barrel4",{
+	description="Metal Drum",
+	tiles={"poly_cmetal_green.png^poly_barrel_lid.png", "poly_cmetal_green.png", "poly_cmetal_green.png"},
+	drawtype="nodebox",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={cracky=3},
+	sounds=visionLib.Sound.Metal(),
+	paramtype2="facedir",
+	on_place=place_rotated.log,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.375, 0.375, 0.5, 0.375}, 
+			{-0.4375, -0.5, -0.25, 0.4375, 0.5, 0.25}, 
+			{-0.25, -0.5, -0.4375, 0.25, 0.5, 0.4375}, 
+			{-0.25, -0.5, -0.5, 0.25, -0.4375, 0.5}, 
+			{-0.5, -0.5, -0.25, 0.5, -0.4375, 0.25},
+			{-0.4375, -0.5, -0.4375, 0.4375, -0.4375, 0.4375},
+			{0.375, 0.5, -0.3125, 0.5, 0.5625, 0.3125}, 
+			{-0.5, 0.5, -0.3125, -0.375, 0.5625, 0.3125}, 
+			{-0.3125, 0.5, 0.375, 0.3125, 0.5625, 0.5}, 
+			{-0.3125, 0.5, -0.5, 0.3125, 0.5625, -0.375}, 
+			{0.0625, -0.5, 0.125, 0.1875, 0.5625, 0.25}, 
+			{0.3125, 0.5, -0.4375, 0.4375, 0.5625, -0.3125}, 
+			{-0.4375, 0.5, -0.4375, -0.3125, 0.5625, -0.3125}, 
+			{-0.4375, 0.5, 0.3125, -0.3125, 0.5625, 0.4375}, 
+			{0.3125, 0.5, 0.3125, 0.4375, 0.5625, 0.4375}, 
+			{0, -0.5, 0.125, 0.25, 0.5625, 0.25}, 
+			{0.0625, -0.5, 0.0625, 0.1875, 0.5625, 0.3125}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.6875, 0.5}, 
+		}
+	},
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		local inv=meta:get_inventory()
+		inv:set_list("main", {""})
+		inv:set_size("main", 24)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", largestorageform)
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+minetest.register_craft({
+	output="poly_decor:barrel4",
+	type="shapeless",
+	recipe={
+		"poly_decor:barrel1", "dye:green"
+	}
+})
+
+minetest.register_node("poly_decor:barrel5",{
+	description="Polythene Drum",
+	tiles={"poly_polythene_blue.png^poly_black_barrel_lid.png^poly_barrel_lid.png", "poly_polythene_blue.png^poly_black_barrel_lid.png", "poly_polythene_blue.png"},
+	drawtype="nodebox",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={cracky=3},
+	sounds=visionLib.Sound.Plastic(),
+	paramtype2="facedir",
+	on_place=place_rotated.log,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.4375, -0.5, -0.4375, 0.4375, 0.6875, 0.4375}, 
+			{-0.5, -0.3125, -0.4375, 0.5, 0.5, 0.4375}, 
+			{-0.5, -0.3125, -0.5, 0.5, 0.5, 0.5}, 
+			{-0.4375, 0.6875, -0.4375, 0.4375, 0.75, -0.375}, 
+			{-0.4375, 0.6875, 0.375, 0.4375, 0.75, 0.4375}, 
+			{-0.4375, 0.6875, -0.4375, -0.375, 0.75, 0.4375}, 
+			{0.375, 0.6875, -0.4375, 0.4375, 0.75, 0.4375}, 
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.5, -0.5, -0.5, 0.5, 0.6875, 0.5}, 
+		}
+	},
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		local inv=meta:get_inventory()
+		inv:set_list("main", {""})
+		inv:set_size("main", 24)
+		meta:set_string("owner", owner)
+		meta:set_string("formspec", largestorageform)
+	end,
+	allow_metadata_inventory_move=function(pos, from_list, from_index, to_list, to_index, count, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return count 
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		if player:get_player_name() == minetest.get_meta(pos):get_string("owner") then 
+			return 65535
+		else
+			return 0
+		end
+	end,
+})
+
+minetest.register_craft({
+	output="poly_decor:barrel5 2",
+	recipe={
+		{"poly_decor:blome", "default:steel_ingot", "poly_decor:blome"},
+		{"poly_decor:froststone", "poly_decor:barrel1", "poly_decor:froststone"},
+		{"poly_decor:enamel", "dye:blue", "poly_decor:enamel"}
+	}
+})
+
+
+minetest.register_node("poly_decor:rope_coil",{
+	description="Rope Coil",
+	drawtype="nodebox",
+	tiles={"poly_rope_pile.png","poly_rope_pile.png","poly_rope_pile_side.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={
+			{-0.4375, -0.5, -0.4375, -0.1875, -0.25, 0.4375}, 
+			{0.1875, -0.5, -0.4375, 0.4375, -0.25, 0.4375}, 
+			{-0.375, -0.5, 0.25, 0.4375, -0.25, 0.4375}, 
+			{-0.375, -0.5, -0.4375, 0.4375, -0.25, -0.1875}, 
+			{-0.3125, -0.25, -0.3125, 0.3125, 0, -0.0625}, 
+			{-0.3125, -0.25, 0.0625, 0.3125, 0, 0.3125}, 
+			{0.0625, -0.25, -0.25, 0.3125, 0, 0.3125}, 
+			{-0.3125, -0.25, -0.3125, -0.0625, 0, 0.3125}, 
+			{-0.5, -0.5, -0.5625, -0.25, -0.3125, 0}, 
+		},
+	},
+	groups={snappy=3},
+	sounds=default.node_sound_leaves_defaults(),
+})
+
+minetest.register_craft({
+	output="poly_decor:rope_coil",
+	recipe={
+		{"poly_decor:rope", "poly_decor:rope", "poly_decor:rope"},
+		{"poly_decor:rope", "", "poly_decor:rope"},
+		{"poly_decor:rope", "poly_decor:rope", "poly_decor:rope"}
 	}
 })
