@@ -2051,3 +2051,85 @@ minetest.register_craft({
 		{"poly_decor:rope", "poly_decor:rope", "poly_decor:rope"}
 	}
 })
+
+minetest.register_node("poly_decor:gruud",{
+	description="Gruu'd Block",
+	tiles={"poly_grud.png"},
+	groups={cracky=3},
+	sounds=visionLib.Sound.Metal(),
+})
+
+minetest.register_node("poly_decor:gruud2",{
+	description="Drear Gruu'd Block",
+	tiles={"poly_grud2.png"},
+	groups={cracky=3},
+	sounds=visionLib.Sound.Metal(),
+})
+
+minetest.register_craft({
+	output="poly_decor:gruud2 2",
+	recipe={
+		{"poly_decor:gruud"},
+		{"poly_decor:blome"}
+	}
+})
+
+minetest.register_craft({
+	type="cooking",
+	output="poly_decor:gruud 2",
+	recipe="poly_decor:rust",
+})
+
+minetest.register_node("poly_decor:gruud_slab",{
+	description="Gruu'd Slab",
+	drawtype="nodebox",
+	tiles={"poly_grud.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={-0.5,-0.5,-0.5,0.5,0,0.5},
+	},
+	groups={cracky=3},
+	on_place=place_rotated.slab,
+	sounds=visionLib.Sound.Metal(),
+})
+
+minetest.register_craft({
+	output="poly_decor:gruud_slab 6",
+	recipe={
+		{"poly_decor:gruud", "poly_decor:gruud", "poly_decor:gruud"}
+	}
+})
+
+minetest.register_craft({
+	type="shapeless",
+	output="poly_decor:gruud",
+	recipe={"poly_decor:gruud_slab","poly_decor:gruud_slab"},
+})
+
+minetest.register_node("poly_decor:gruud_stair",{
+	description="Gruu'd Stairs",
+	drawtype="nodebox",
+	tiles={"poly_grud.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={
+			{-0.5,-0.5,-0.5,0.5,0,0.5},
+			{0.5,0.5,0.5,-0.5,-0.5,0}
+		},
+	},
+	groups={cracky=3},
+	sounds=visionLib.Sound.Metal(),
+})
+
+minetest.register_craft({
+	output="poly_decor:blome_stair 8",
+	recipe={
+		{"poly_decor:gruud", "", ""},
+		{"poly_decor:gruud", "poly_decor:gruud", ""},
+		{"poly_decor:gruud", "poly_decor:gruud", "poly_decor:gruud"}
+	}
+})
