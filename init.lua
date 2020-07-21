@@ -2133,3 +2133,278 @@ minetest.register_craft({
 		{"poly_decor:gruud", "poly_decor:gruud", "poly_decor:gruud"}
 	}
 })
+
+minetest.register_node("poly_decor:carved_jungle",{
+	description="Carved Jungle Log",
+	drawtype="nodebox",
+	tiles={"default_jungletree_top.png", "default_jungletree_top.png", "poly_cut_jungle.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={
+			{-0.4375, -0.5, -0.1875, 0.4375, 0.5, 0.1875},
+			{-0.1875, -0.5, -0.4375, 0.1875, 0.5, 0.4375},
+			{-0.375, -0.5, -0.25, 0.375, 0.5, 0.25},
+			{-0.25, -0.5, -0.375, 0.25, 0.5, 0.375},
+			{-0.3125, -0.5, -0.3125, 0.3125, 0.5, 0.3125},
+		},
+	},
+	groups={choppy=3},
+	sounds=default.node_sound_wood_defaults(),
+	on_place=place_rotated.log,
+})
+
+minetest.register_craft({
+	output="poly_decor:carved_jungle 2",
+	recipe={
+		{"default:jungletree"},
+		{"default:junglewood"},
+	}
+})
+
+minetest.register_node("poly_decor:carved_acacia",{
+	description="Carved Acacia Log",
+	drawtype="nodebox",
+	tiles={"default_acacia_tree_top.png", "default_acacia_tree_top.png", "poly_cut_acacia.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={
+			{-0.4375, -0.5, -0.4375, 0.4375, 0.5, 0.4375},
+		},
+	},
+	groups={choppy=3},
+	sounds=default.node_sound_wood_defaults(),
+	on_place=place_rotated.log,
+})
+
+minetest.register_craft({
+	output="poly_decor:carved_acacia 2",
+	recipe={
+		{"default:acacia_tree"},
+		{"default:acacia_wood"},
+	}
+})
+
+minetest.register_node("poly_decor:carved_pine",{
+	description="Carved Pine Log",
+	drawtype="nodebox",
+	tiles={"default_pine_tree_top.png", "default_pine_tree_top.png", "poly_cut_pine.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={
+			{-0.375, -0.5, -0.3125, 0.375, 0.5, 0.3125},
+			{-0.3125, -0.5, -0.375, 0.3125, 0.5, 0.375},
+		},
+	},
+	groups={choppy=3},
+	sounds=default.node_sound_wood_defaults(),
+	on_place=place_rotated.log,
+})
+
+minetest.register_craft({
+	output="poly_decor:carved_pine 2",
+	recipe={
+		{"default:pine_tree"},
+		{"default:pine_wood"},
+	}
+})
+
+minetest.register_node("poly_decor:carved_aspen",{
+	description="Carved Aspen Log",
+	drawtype="nodebox",
+	tiles={"default_aspen_tree_top.png", "default_aspen_tree_top.png", "poly_cut_aspen.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={
+			{-0.375, -0.5, -0.3125, 0.375, 0.5, 0.3125},
+			{-0.3125, -0.5, -0.375, 0.3125, 0.5, 0.375},
+		},
+	},
+	groups={choppy=3},
+	sounds=default.node_sound_wood_defaults(),
+	on_place=place_rotated.log,
+})
+
+minetest.register_craft({
+	output="poly_decor:carved_aspen 2",
+	recipe={
+		{"default:aspen_tree"},
+		{"default:aspen_wood"},
+	}
+})
+
+minetest.register_node("poly_decor:carved_apple",{
+	description="Carved Apple Log",
+	drawtype="nodebox",
+	tiles={"default_tree_top.png", "default_tree_top.png", "poly_cut_apple.png"},
+	paramtype="light",
+	paramtype2="facedir",
+	node_box={
+		type="fixed",
+		fixed={
+			{-0.4375, -0.5, -0.1875, 0.4375, 0.5, 0.1875},
+			{-0.1875, -0.5, -0.4375, 0.1875, 0.5, 0.4375},
+			{-0.375, -0.5, -0.3125, 0.375, 0.5, 0.3125},
+			{-0.3125, -0.5, -0.375, 0.3125, 0.5, 0.375},
+		},
+	},
+	groups={choppy=3},
+	sounds=default.node_sound_wood_defaults(),
+	on_place=place_rotated.log,
+})
+
+minetest.register_craft({
+	output="poly_decor:carved_apple 2",
+	recipe={
+		{"default:tree"},
+		{"default:wood"},
+	}
+})
+
+local trashform=""..
+"size[8,7;]"..
+"list[context;main;3,1;2,2;]"..
+"list[current_player;main;0,3.2;8,4;]"..
+"listring[]"
+
+local function clear_trash(pos)
+	minetest.get_meta(pos):get_inventory():set_list("main", {})
+end
+
+minetest.register_node("poly_decor:trashcan",{
+	description="Metal Trash Can",
+	tiles={"poly_trash_top.png", "poly_iron2.png", "poly_trash_side.png"},
+	drawtype="nodebox",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={cracky=3},
+	sounds=visionLib.Sound.Metal(),
+	paramtype2="facedir",
+	on_place=place_rotated.log,
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.375, 0.375, 0.25, 0.375},
+			{-0.4375, 0.25, -0.4375, 0.4375, 0.4375, 0.4375},
+			{-0.1875, 0.4375, -0.0625, 0.1875, 0.5, 0.0625},
+		}
+	},
+	after_place_node=function(pos, placer, itemstack, pointed_thing)
+		local meta=minetest.get_meta(pos)
+		local owner=placer:get_player_name()
+		local inv=meta:get_inventory()
+		inv:set_list("main", {""})
+		inv:set_size("main", 4)
+		meta:set_string("formspec", trashform)
+	end,
+	allow_metadata_inventory_put=function(pos, listname, index, stack, player)
+		minetest.after(0, clear_trash, pos)
+		return 65535
+	end,
+	allow_metadata_inventory_take=function(pos, listname, index, stack, player)
+		return 0
+	end,
+})
+
+minetest.register_craft({
+	output="poly_decor:trashcan 2",
+	recipe={
+		{"default:iron_ingot", "default:tin_ingot", "default:iron_ingot"},
+		{"dye:gray", "", "dye:gray"},
+		{"default:iron_ingot", "dye:gray", "default:iron_ingot"}
+	}
+})
+
+minetest.register_craftitem("poly_decor:life_paste", {
+	description=minetest.colorize("#80fff0", "Transmutation Paste"),
+	inventory_image="poly_life_paste.png",
+})
+
+minetest.register_craft({
+	output="poly_decor:life_paste 4",
+	type="shapeless",
+	recipe={"default:blueberries","default:clay_lump","default:coral_cyan","farming:flour"}
+})
+
+minetest.register_node("poly_decor:dasies",{
+	description="White Dasies",
+	tiles={"poly_dasies.png", "poly_plant_t.png", "poly_plant_t.png"},
+	drawtype="nodebox",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={snappy=3},
+	buildable_to=true,
+	walkable=false,
+	sounds=default.node_sound_leaves_defaults(),
+	paramtype2="facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.125, -0.5, 0, -0.0625, -0.125, 0.0625},
+			{0.125, -0.5, -0.25, 0.1875, -0.125, -0.1875},
+			{0.0625, -0.5, 0.125, 0.125, -0.25, 0.1875},
+			{-0.25, -0.5, -0.3125, -0.1875, -0.1875, -0.25},
+			{-0.1875, -0.5, 0.25, -0.125, -0.1875, 0.3125},
+			{0, -0.25, 0.0625, 0.1875, -0.25, 0.25},
+			{-0.25, -0.1875, 0.1875, -0.0625, -0.1875, 0.375},
+			{-0.375, -0.1875, -0.4375, -0.0625, -0.1875, -0.125},
+			{-0.1875, -0.125, -0.0625, 0, -0.125, 0.125},
+			{0.0625, -0.125, -0.3125, 0.25, -0.125, -0.125},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.375, 0.375, -0.25, 0.375},
+		}
+	}
+})
+minetest.register_craft({
+	output="poly_decor:dasies",
+	type="shapeless",
+	recipe={"poly_decor:life_paste","flowers:tulip_black"}
+})
+
+minetest.register_node("poly_decor:clover",{
+	description="Clover",
+	tiles={"poly_clover.png", "poly_plant_t.png", "poly_plant_t.png"},
+	drawtype="nodebox",
+	paramtype="light",
+	sunlight_propagates=true,
+	groups={snappy=3},
+	buildable_to=true,
+	walkable=false,
+	sounds=default.node_sound_leaves_defaults(),
+	paramtype2="facedir",
+	node_box = {
+		type = "fixed",
+		fixed = {
+			{-0.3125, -0.5, 0, -0.25, -0.4375, 0.0625},
+			{0.125, -0.5, -0.1875, 0.1875, -0.4375, -0.125},
+			{0.125, -0.5, 0.1875, 0.1875, -0.4375, 0.25},
+			{-0.1875, -0.5, -0.3125, -0.125, -0.4375, -0.25},
+			{0.1875, -0.5, -0.375, 0.25, -0.4375, -0.3125},
+			{-0.375, -0.5, 0.3125, -0.3125, -0.4375, 0.375},
+			{0.3125, -0.5, 0.3125, 0.375, -0.4375, 0.375},
+			{-0.5, -0.4375, -0.5, 0.5, -0.4375, 0.5},
+		}
+	},
+	selection_box = {
+		type = "fixed",
+		fixed = {
+			{-0.375, -0.5, -0.375, 0.375, -0.25, 0.375},
+		}
+	}
+})
+minetest.register_craft({
+	output="poly_decor:clover",
+	type="shapeless",
+	recipe={"poly_decor:life_paste","flowers:rose"}
+})
